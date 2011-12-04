@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+{% block head_title %}{{post.title}}{% endblock %}
+{% block title %}{{post.title}}{% endblock %}
+
+{% block content %}
+  {{post.body}}
+    
+  {% load comments %}
+  {% render_comment_list for post %}
+  {% for comment in comment_list %}
+    <a name="c{{ comment.id }}"></a>
+    <a href="{% get_comment_permalink comment %}">
+        permalink for comment #{{ forloop.counter }}
+    </a>
+    ...
+  {% endfor %}
+  {% render_comment_form for post %}  
+{% endblock %}
