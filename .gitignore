@@ -10,14 +10,6 @@ syntax: glob
 *.swp
 *.tmp
 _generated_media*
-desktop.ini
 settings_overrides.py
-nbproject
-autoload
-django
-djangoappengine
-django_mongodb_engine
-djangotoolbox
-dbindexer
 decoupled
 mediagenerator
