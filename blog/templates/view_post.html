@@ -4,37 +4,46 @@
 
 {% block content %}
   <div id="post">
-    <h1>{{post.title}}</h1>
-    {{post.body}}
+    <h2>{{post.title}}</h2>
+    <div id="title_date">&mdash; {{post.posted|date:"l, F mS Y"}}</div>    
+    {{post.body|safe}}
   </div>
   
-  {% load facebook %}
-  {% facebook_button %}
-
-  {% if not request.user.is_authenticated %}
-    <h2>Login to post a comment</h2>
-  {% else %}
-    <h2>Logged in as {{ request.user }}</h2>
-    <img src="{{ request.user.profile.avatar }}">
-    <a href="{% url socialregistration:logout %}">Logout</a>
-  {% endif %}
+  <div id="comments">
+    <center><h2>Comments ""</h2></center><br />
+    {% load comments %}
+    <ul>
+      {% get_comment_list for post as comment_list %}
+      {% for comment in comment_list %}
+        <li>
+          <img src="{{ comment.user.profile.avatar}}" />
+          <a href="{% get_comment_permalink comment %}">
+            On {{ comment.submit_date }} <em>{{ comment.user.username }}</em> said;
+          </a>
+          <a name="c{{ comment.id }}"></a>
+          <p>
+            {{ comment.comment }}
+          </p>             
+          
+        </li>    
+      {% endfor %}
+    </ul>
     
-  {% load comments %}
-  <ul>
-    {% get_comment_list for post as comment_list %}
-    {% for comment in comment_list %}
-      <li>
-        <img src="{{ comment.user.profile.avatar}}" />
-        <em>{{ comment.user.username }}</em>          
-        <a name="c{{ comment.id }}"></a>
-        <p>
-          {{ comment.comment }}
-        </p>    
-        <a href="{% get_comment_permalink comment %}">
-            permalink for comment #{{ forloop.counter }}
-        </a>
-      </li>    
-    {% endfor %}
-  </ul>
-  {% render_comment_form for post %}  
+    {% if not request.user.is_authenticated %}
+      <div id="login_to_post">
+        Login to post a comment <br /><br />
+        {% load facebook %}
+        {% facebook_button %}
+      </div>
+    {% else %}
+      <h3 id="add_comment">Add your comment</h3>
+      <div id="logged_in_as">
+        <img src="{{ request.user.profile.avatar }}">
+        <span>Logged in as {{ request.user }}</span>      
+        <a href="{% url socialregistration:logout %}"> logout &rarr;</a>
+      </div>
+      {% render_comment_form for post %}
+    {% endif %}
+    
+  </div>
 {% endblock %}
