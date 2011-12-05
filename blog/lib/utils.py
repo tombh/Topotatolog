@@ -13,7 +13,7 @@ def socregUserCreate(user, profile, api):
     # --------------------
     # Twitter API call
     # --------------------
-    if profile.twitter_id:
+    if hasattr(profile, 'twitter_id'):
         response = api.request("https://api.twitter.com/users/" + profile.twitter_id + ".json")
         
         #response is only a JSON string at the moment 

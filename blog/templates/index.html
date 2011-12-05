@@ -16,7 +16,7 @@
             </div>
             <div class="details">
               <h2><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
-              {{ post.body|slice:"150"|safe }}{% if post.body|length > 150 %}...{% endif %}
+              {{ post.body|striptags|slice:"150" }} &hellip;
             </div>
           </li>
       {% endfor %}

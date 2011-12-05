@@ -5,7 +5,7 @@
 {% block content %}
   <div id="post">
     <h2>{{post.title}}</h2>
-    <div id="title_date">&mdash; {{post.posted|date:"l, F mS Y"}}</div>    
+    <div id="title_date">&mdash; {{post.posted|date:"l, F jS Y"}}</div>    
     {{post.body|safe}}
   </div>
   <div id="comments">

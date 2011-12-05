@@ -25,6 +25,7 @@ h1, h2, h3, #logo, #title_date, #logged_in_as span, #login_to_post{
 h2{
   font-weight: bolder;
   font-size: 50px;
+  padding: 4px;
 }
 h3{
   font-size: 40px;
@@ -36,7 +37,7 @@ h3{
   margin-bottom: 2em;
   text-shadow: 1px 1px 2px #000;
   letter-spacing: 8px;
-  line-height: 100%;
+  line-height: 120%;
 }
 
 #strap{
@@ -73,6 +74,14 @@ input, textarea{
   padding: 0;
 }
 
+.code{
+  display: block;
+  margin: 10px 30px;
+  font-family: monospace;  
+  text-align: left;
+  font-size: 14px;
+}
+
 #post{
   margin: 3em 0 2em 0;
   text-align: justify;
@@ -99,6 +108,7 @@ input, textarea{
   width: 120px;
   float: left;
   text-align: center;
+  margin-top: 11px;
 }
 
 .details{
