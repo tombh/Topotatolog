@@ -52,6 +52,11 @@ a:hover{
   color: #E8BF56;
 }
 
+#sys_messages{
+  text-align: center;
+  font-size: 2em;
+}
+
 ul{
   margin: 0;
   padding: 0;
@@ -164,7 +169,12 @@ input, textarea{
   vertical-align: middle;
 }
 
-#id_name, #id_email, #id_url, #comments label, #comments .submit-preview{
+#id_name, 
+#id_email, 
+#id_url, 
+#comments label, 
+#comments .submit-preview,
+#id_honeypot{
   display: none;
 }
 

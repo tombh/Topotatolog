@@ -8,7 +8,6 @@
     <div id="title_date">&mdash; {{post.posted|date:"l, F mS Y"}}</div>    
     {{post.body|safe}}
   </div>
-  
   <div id="comments">
     <center><h2>Comments ""</h2></center><br />
     {% load comments %}
@@ -42,8 +41,12 @@
         <span>Logged in as {{ request.user }}</span>      
         <a href="{% url socialregistration:logout %}"> logout &rarr;</a>
       </div>
-      {% render_comment_form for post %}
+      
+      {% include 'comments/blog_comment_form.html' %}
+      
     {% endif %}
     
   </div>
+  
+  
 {% endblock %}

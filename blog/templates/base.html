@@ -27,13 +27,15 @@
       <div id="content">
         <h1 id="strap">An ultra simple blog made with Django</h1>
         {% block content-header %}
-          {% if error %}<div class="error">{{ error }}</div>{% endif %}
-          {% if info %}<div class="info">{{ info }}</div>{% endif %}
-          {% if messages %}
-            {% for message in messages %}
-              <div class="info">{{ message }}</div>
-            {% endfor %}
-          {% endif %}
+          <span id="sys_messages">
+            {% if error %}<div class="error">{{ error }}</div>{% endif %}
+            {% if info %}<div class="info">{{ info }}</div>{% endif %}
+            {% if messages %}
+              {% for message in messages %}
+                <div class="info">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+          </span>
         {% endblock %}
   
         {% block content %}{% endblock %}

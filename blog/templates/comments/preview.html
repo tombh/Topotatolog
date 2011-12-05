@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Your comment" %}{% endblock %}
+
+{% block content %}
+
+  <div id="comments">
+    {% include 'comments/blog_comment_form.html' %}
+  </div>
+  
+{% endblock %}
