@@ -89,4 +89,7 @@ TEST_RUNNER = 'djangotoolbox.test.CapturingTestSuiteRunner'
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'blog/templates'),)
 
+MEDIA_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'blog/assets')
+MEDIA_URL = '/assets/'
+
 ROOT_URLCONF = 'blog.urls'

@@ -3,16 +3,38 @@
 {% block title %}{{post.title}}{% endblock %}
 
 {% block content %}
-  {{post.body}}
+  <div id="post">
+    <h1>{{post.title}}</h1>
+    {{post.body}}
+  </div>
+  
+  {% load facebook %}
+  {% facebook_button %}
+
+  {% if not request.user.is_authenticated %}
+    <h2>Login to post a comment</h2>
+  {% else %}
+    <h2>Logged in as {{ request.user }}</h2>
+    <img src="{{ request.user.profile.avatar }}">
+    <a href="{% url socialregistration:logout %}">Logout</a>
+  {% endif %}
     
   {% load comments %}
-  {% render_comment_list for post %}
-  {% for comment in comment_list %}
-    <a name="c{{ comment.id }}"></a>
-    <a href="{% get_comment_permalink comment %}">
-        permalink for comment #{{ forloop.counter }}
-    </a>
-    ...
-  {% endfor %}
+  <ul>
+    {% get_comment_list for post as comment_list %}
+    {% for comment in comment_list %}
+      <li>
+        <img src="{{ comment.user.profile.avatar}}" />
+        <em>{{ comment.user.username }}</em>          
+        <a name="c{{ comment.id }}"></a>
+        <p>
+          {{ comment.comment }}
+        </p>    
+        <a href="{% get_comment_permalink comment %}">
+            permalink for comment #{{ forloop.counter }}
+        </a>
+      </li>    
+    {% endfor %}
+  </ul>
   {% render_comment_form for post %}  
 {% endblock %}

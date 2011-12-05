@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+import settings
 
 handler500 = 'djangotoolbox.errorviews.server_error'
 
@@ -14,6 +15,14 @@ dbindexer.autodiscover()
 urlpatterns = patterns('',
     # Warmup
     ('^_ah/warmup$', 'djangoappengine.views.warmup'),
+    
+
+    (
+     r'^assets/(?P<path>.*)$', 
+     'django.views.static.serve',  
+     {'document_root': settings.MEDIA_ROOT}
+    ),
+
 
     # Index
     (r'^$', 'blog.views.index'),

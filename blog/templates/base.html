@@ -5,6 +5,8 @@
       lang="{% firstof LANGUAGE_CODE 'en' %}">
   <head>
     <title>{% block title %}{% endblock %}</title>
+    <script type="text/javascript" src="http://use.typekit.com/zqr3wkt.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     {% block css %}
     {% endblock %}
@@ -13,29 +15,16 @@
     {% endblock %}
 
     {% block extra-head %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="/assets/main.css" />
   </head>
 
   <body>
-    <div id="header">
-      <a id="logo" href="/">ToPotatoLog</a>
-    </div>
-
-    {% load facebook %}
-    {% facebook_button %}
-
-    {% if not request.user.is_authenticated %}
-      <h1>django-socialregistration login</h2>
-    {% else %}
-      <h1>Hi, {{ request.user }}</h1>
-      <img src="{{ request.user.profile.avatar }}">
-    {% endif %}
-
-    {% if request.user.is_authenticated %}
-      <a href="{% url socialregistration:logout %}">Logout</a>
-    {% endif %}
-
-    <div class="columns">
-      <div id="content" class="column">
+    <div id="main">
+      <div id="header">
+        <a id="logo" href="/">ToPotatoLog</a>
+      </div>
+      
+      <div id="content">
         {% block content-header %}
           {% if error %}<div class="error">{{ error }}</div>{% endif %}
           {% if info %}<div class="info">{{ info }}</div>{% endif %}
@@ -45,20 +34,14 @@
             {% endfor %}
           {% endif %}
         {% endblock %}
-
+  
         {% block content %}{% endblock %}
       </div>
-
-      <div id="sidebar" class="column">
-        {% block sidebar %}
-        {% endblock %}
-      </div>
-    </div>
-
-    <div id="footer">
+        
       
+  
+      <div id="footer"></div>
     </div>
-
     {% block js %}
     {% endblock %}
   </body>

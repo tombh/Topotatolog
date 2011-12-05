@@ -2,11 +2,24 @@
 {% block title %}It works!{% endblock %}
 
 {% block content %}
-  <h2>Posts</h2>
+  <h1>An ultra simple blog made with Django</h1>
   {% if posts %}
       <ul>
       {% for post in posts %}
-          <li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li>
+          <li class="summary">
+            <div class="date">
+              <div>
+                {{post.posted|date:"D d"}}
+              </div>
+              <div>
+                {{post.posted|date:"M Y"}}
+              </div>
+            </div>
+            <div class="details">
+              <h2><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
+              {{ post.body|slice:"150" }}{% if post.body|length > 150 %}...{% endif %}
+            </div>
+          </li>
       {% endfor %}
       </ul>
   {% else %}
