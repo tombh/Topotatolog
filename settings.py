@@ -36,6 +36,7 @@ INSTALLED_APPS = (
 
     'socialregistration',
     'socialregistration.contrib.facebook',
+    'socialregistration.contrib.twitter',
     'blog',
 
     # djangoappengine should come last, so it can override a few manage.py commands
@@ -66,12 +67,16 @@ GAE_SETTINGS_MODULES = (
 
 AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
-        'socialregistration.contrib.facebook.auth.FacebookAuth',        
+        'socialregistration.contrib.facebook.auth.FacebookAuth',
+        'socialregistration.contrib.twitter.auth.TwitterAuth',        
 )
 
 FACEBOOK_APP_ID = '283539771683468'
 FACEBOOK_SECRET_KEY = '9b1c4bdfafda6c90db458411fc8d4412'
 FACEBOOK_REQUEST_PERMISSIONS = ''
+
+TWITTER_CONSUMER_KEY = 'btfDHMB2gPfTZ8HxeSBg'
+TWITTER_CONSUMER_SECRET_KEY = 'RTmqX3erXIR0Z29cXiQ2QDJOn1Vn2Rvn0QbAxDCswuA'
 
 SOCIALREGISTRATION_GENERATE_USERNAME = True
 SOCIALREGISTRATION_GENERATE_USERNAME_FUNCTION = 'utils.socregUserCreate'

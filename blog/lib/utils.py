@@ -1,27 +1,39 @@
 from blog.models import UserProfile
 from django.template.defaultfilters import slugify
-
-import sys
-from pprint import pprint
+import json
 
 def socregUserCreate(user, profile, api):
     """
-    This is the callback after a user has succuessfully connected their social network.
+    This is the callback from the socialregistration app after a user has succuessfully connected their social network.
     I'm mainly using it here to add the user's profile picture.
     """
     
-    #Facebook API call
-    info = api.graph.request(profile.uid, {'fields' : 'picture, username, first_name, last_name'})    
+    info = {}
     
-    #pprint("1")
-    #pprint(info)
-    #pprint(vars(profile))    
-    #pprint("2")
-    #sys.exit()
+    # --------------------
+    # Twitter API call
+    # --------------------
+    if profile.twitter_id:
+        response = api.request("https://api.twitter.com/users/" + profile.twitter_id + ".json")
+        
+        #response is only a JSON string at the moment 
+        details = json.loads(response)  
+        
+        info['picture'] = details['profile_image_url']
+        info['username'] = details['screen_name']
+           
+    # --------------------
+    # Facebook API call
+    # --------------------
+    else:
+        info = api.graph.request(profile.uid, {'fields' : 'picture, username, first_name, last_name'})
     
+    
+    # Create the username for Django's User model
     if info['username']:
         user.username = info['username']
     else:
+        #If there's no username slugify one from their real name
         user.username = slugify(info['first_name'] + info['lastname'])
     
     # Providing a dummy email allows us to automatically post comments,

@@ -32,7 +32,9 @@
       <div id="login_to_post">
         Login to post a comment <br /><br />
         {% load facebook %}
-        {% facebook_button %}
+        {% facebook_button 'assets/signin_facebook.png' %}
+        {% load twitter %}
+        {% twitter_button 'assets/signin_twitter.png' %}
       </div>
     {% else %}
       <h3 id="add_comment">Add your comment</h3>
